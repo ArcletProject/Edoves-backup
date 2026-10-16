@@ -1,0 +1,32 @@
+[project]
+name = "arclet-edoves"
+version = "0.0.18"
+description = "A Backup, Old version of Entari"
+authors = [
+    {name = "RF-Tar-Railt",email = "rf_tar_railt@qq.com"},
+]
+dependencies = [
+"aiohttp",
+"pydantic<2,>=1.8.2",
+"yarl",
+"loguru>=0.6.0",
+"arclet-letoderea<0.4.0,>=0.3.5",
+"arclet-alconna<1.2.0,>=1.0.2",
+"importlib-metadata",
+]
+requires-python = ">=3.8"
+readme = "README.md"
+license = {text = "MIT"}
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+
+[tool.pdm]
+distribution = true
+
+[tool.pyright]
+pythonVersion = "3.8"
+pythonPlatform = "All"
+typeCheckingMode = "basic"

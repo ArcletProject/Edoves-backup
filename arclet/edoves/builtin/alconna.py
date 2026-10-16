@@ -1,0 +1,22 @@
+from arclet.alconna import Alconna, Arpamar, compile
+from arclet.letoderea.entities.auxiliary import BaseAuxiliary
+from arclet.letoderea.exceptions import ParsingStop
+from arclet.letoderea.utils import ArgumentPackage
+
+from .message.chain import MessageChain
+
+
+class AlconnaAuxiliary(BaseAuxiliary):
+    alconna: Alconna
+
+    def __init__(self, alconna: Alconna):
+        self.analyser = compile(alconna)
+        super().__init__()
+
+        @self.set_aux("before_parse", "supply", keep=True)
+        def supply(target_argument: ArgumentPackage):
+            if target_argument.annotation == MessageChain:
+                res = self.analyser.analyse(target_argument.value)
+                if not res.matched:
+                    raise ParsingStop
+                return res
